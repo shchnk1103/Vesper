@@ -25,13 +25,17 @@ struct Graphs: View {
                 
                 ForEach(chartGroups) { group in
                     VStack(alignment: .leading, spacing: 10, content: {
-                        Text(format(date: group.date, format: "MMM yy"))
+                        Text(format(date: group.date, format: "MMM yyyy"))
                             .font(.caption)
                             .foregroundStyle(.gray)
                             .hSpacing(.leading)
                         
                         NavigationLink(value: group.date) {
-                            CardView(income: group.totalIncome, expense: group.totalExpense)
+                            CardView(
+                                income: group.totalIncome,
+                                expense: group.totalExpense,
+                                isHomeCardView: false
+                            )
                         }
                         .buttonStyle(.plain)
                     })
@@ -196,7 +200,7 @@ struct ListOfExpenses: View {
             .padding(15)
         }
         .background(.gray.opacity(0.15))
-        .navigationTitle(format(date: month, format: "MMM yy"))
+        .navigationTitle(format(date: month, format: "MMM yyyy"))
     }
 }
 

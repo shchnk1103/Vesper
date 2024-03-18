@@ -86,6 +86,7 @@ struct ContentView: View {
                 .padding(.horizontal, tabType ? 15 : 0)
             }
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
     }
     
     var tabSelection: Binding<SegmentedTab> {

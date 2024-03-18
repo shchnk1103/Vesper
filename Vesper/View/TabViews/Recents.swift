@@ -25,28 +25,39 @@ struct Recents: View {
             let size = $0.size
             
             ScrollView(.vertical) {
-                LazyVStack(spacing: 10, pinnedViews: [.sectionHeaders], content: {
-                    Section {
-                        /// Date Filter Button
-                        Button(action: {
-                            showFilterView = true
-                        }, label: {
-                            Text("\(format(date: startDate, format: "dd-MMM-yy")) to \(format(date: endDate, format: "dd-MMM-yy"))")
+                HeaderView(size)
+                    .padding(.horizontal, 15)
+                    
+                LazyVStack(spacing: 10, content: {
+                    /// Date Filter Button
+                    Button(action: {
+                        showFilterView = true
+                    }, label: {
+                        HStack(spacing: 5, content: {
+                            Circle()
+                                .fill(appTint.gradient)
+                            
+                            Text("\(format(date: startDate, format: "dd-MMM-yyyy")) to \(format(date: endDate, format: "dd-MMM-yyyy"))")
                                 .font(.caption2)
                                 .foregroundStyle(.gray)
                         })
-                        .hSpacing(.leading)
+                    })
+                    .hSpacing(.leading)
+                    .frame(height: 15)
+                    .padding(.horizontal, 15)
+                    
+                    FilterTransactionsView(startDate: startDate, endDate: endDate) { transactions in
+                        /// Card View
+                        CardView(
+                            income: total(transactions, category: .income),
+                            expense: total(transactions, category: .expense)
+                        )
+                        .padding(.horizontal, 15)
                         
-                        FilterTransactionsView(startDate: startDate, endDate: endDate) { transactions in
-                            /// Card View
-                            CardView(
-                                income: total(transactions, category: .income),
-                                expense: total(transactions, category: .expense)
-                            )
-                            
+                        LazyVStack {
                             /// Custom Segmented Control
                             CustomSegmentedControl()
-                                .padding(.bottom, 10)
+                                .padding(.vertical, 10)
                             
                             ForEach(transactions.filter({ $0.category == selectedCategory.rawValue })) { transaction in
                                 NavigationLink(value: transaction) {
@@ -55,12 +66,26 @@ struct Recents: View {
                                 .buttonStyle(.plain)
                             }
                         }
-                    } header: {
-                        HeaderView(size)
+                        .padding(.horizontal, 15)
+                        .mask {
+                            Rectangle()
+                                .visualEffect { content, geometryProxy in
+                                    content
+                                        .offset(y: backgroundLimitOffset(geometryProxy))
+                                }
+                        }
+                        .background {
+                            Rectangle()
+                                .fill(Color.clear)
+                                .visualEffect { content, geometryProxy in
+                                    content
+                                        .offset(y: backgroundLimitOffset(geometryProxy))
+                                }
+                        }
                     }
                 })
-                .padding(15)
             }
+            .scrollTargetBehavior(CustomScrollBehavior())
             .scrollIndicators(.hidden)
             .background(.gray.opacity(0.15))
             .blur(radius: showFilterView ? 8 : 0)
@@ -98,6 +123,7 @@ struct Recents: View {
                         .foregroundStyle(.gray)
                 }
             })
+            .frame(height: 45)
             .visualEffect { content, geometryProxy in
                 content
                     .scaleEffect(headerScale(size, proxy: geometryProxy), anchor: .topLeading)
@@ -118,20 +144,6 @@ struct Recents: View {
             }
         })
         .padding(.bottom, userName.isEmpty ? 10 : 5)
-        .background {
-            VStack(spacing: 0, content: {
-                Rectangle()
-                    .fill(.ultraThinMaterial)
-                
-                Divider()
-            })
-            .visualEffect { content, geometryProxy in
-                content
-                    .opacity(headerBGOpacity(geometryProxy))
-            }
-            .padding(.horizontal, -15)
-            .padding(.top, -(safeArea.top + 15))
-        }
     }
     
     /// Segmented Control
@@ -161,6 +173,13 @@ struct Recents: View {
         .padding(.top, 5)
     }
     
+    /// Background Limit Offset
+    func backgroundLimitOffset(_ proxy: GeometryProxy) -> CGFloat {
+        let minY = proxy.frame(in: .scrollView).minY
+        
+        return minY < 134 ? -minY + 136 : 0
+    }
+    
     func headerBGOpacity(_ proxy: GeometryProxy) -> CGFloat {
         let minY = proxy.frame(in: .scrollView).minY + safeArea.top
         return minY > 0 ? 0 : (-minY / 15)
@@ -174,6 +193,15 @@ struct Recents: View {
         let scale = (min(max(progress, 0), 1)) * 0.3
         
         return scale + 1
+    }
+}
+
+/// Custom Scroll Target Behavior
+struct CustomScrollBehavior: ScrollTargetBehavior {
+    func updateTarget(_ target: inout ScrollTarget, context: TargetContext) {
+        if target.rect.minY < 83 {
+            target.rect = .zero
+        }
     }
 }
 
