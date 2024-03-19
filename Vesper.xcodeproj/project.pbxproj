@@ -29,6 +29,8 @@
 		797EBA882BA1766A00544C10 /* DateFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EBA872BA1766A00544C10 /* DateFilterView.swift */; };
 		797EBA8A2BA1823100544C10 /* LockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EBA892BA1823100544C10 /* LockView.swift */; };
 		797EBA8C2BA1B68600544C10 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EBA8B2BA1B68600544C10 /* TransactionView.swift */; };
+		7992D9552BA96731006FBC0D /* ThemeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D9542BA96731006FBC0D /* ThemeChangeView.swift */; };
+		7992D9572BA97EAF006FBC0D /* SunAndMoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */; };
 		79F127272BA0490100DE1ACB /* VesperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F127262BA0490100DE1ACB /* VesperApp.swift */; };
 		79F127292BA0490100DE1ACB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F127282BA0490100DE1ACB /* ContentView.swift */; };
 		79F1272D2BA0490200DE1ACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F1272C2BA0490200DE1ACB /* Assets.xcassets */; };
@@ -90,6 +92,8 @@
 		797EBA872BA1766A00544C10 /* DateFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateFilterView.swift; sourceTree = "<group>"; };
 		797EBA892BA1823100544C10 /* LockView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockView.swift; sourceTree = "<group>"; };
 		797EBA8B2BA1B68600544C10 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
+		7992D9542BA96731006FBC0D /* ThemeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeView.swift; sourceTree = "<group>"; };
+		7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndMoon.swift; sourceTree = "<group>"; };
 		79F127232BA0490100DE1ACB /* Vesper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vesper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F127262BA0490100DE1ACB /* VesperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesperApp.swift; sourceTree = "<group>"; };
 		79F127282BA0490100DE1ACB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -248,6 +252,8 @@
 				797EBA872BA1766A00544C10 /* DateFilterView.swift */,
 				797EBA892BA1823100544C10 /* LockView.swift */,
 				795BC3D42BA2C24400499014 /* FilterTransactionsView.swift */,
+				7992D9542BA96731006FBC0D /* ThemeChangeView.swift */,
+				7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -383,9 +389,11 @@
 				797EBA8C2BA1B68600544C10 /* TransactionView.swift in Sources */,
 				79F127292BA0490100DE1ACB /* ContentView.swift in Sources */,
 				79F127472BA051A000DE1ACB /* Recents.swift in Sources */,
+				7992D9552BA96731006FBC0D /* ThemeChangeView.swift in Sources */,
 				79F127512BA074DE00DE1ACB /* Date+Extensions.swift in Sources */,
 				79F1273E2BA04CE400DE1ACB /* Tab.swift in Sources */,
 				797EBA8A2BA1823100544C10 /* LockView.swift in Sources */,
+				7992D9572BA97EAF006FBC0D /* SunAndMoon.swift in Sources */,
 				79F1274F2BA0538200DE1ACB /* View+Extensions.swift in Sources */,
 				79F127272BA0490100DE1ACB /* VesperApp.swift in Sources */,
 				797EBA862BA1691300544C10 /* SwipeAction.swift in Sources */,

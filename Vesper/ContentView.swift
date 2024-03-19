@@ -24,6 +24,7 @@ struct ContentView: View {
     @AppStorage("lockWhenAppGoesBackground") private var lockWhenAppGoesBackground: Bool = false
     /// View Properties
     @AppStorage("tabType") private var tabType: Bool = false
+    @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
     var body: some View {
         LockView(
@@ -87,6 +88,7 @@ struct ContentView: View {
             }
         }
         .ignoresSafeArea(.keyboard, edges: .bottom)
+        .preferredColorScheme(userTheme.colorScheme)
     }
     
     var tabSelection: Binding<SegmentedTab> {
