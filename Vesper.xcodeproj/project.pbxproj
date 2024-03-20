@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7956D7112BAAC2AC0084F137 /* UniversalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956D7102BAAC2AC0084F137 /* UniversalAlert.swift */; };
+		7956D7122BAAC2B60084F137 /* UniversalAlert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7956D7102BAAC2AC0084F137 /* UniversalAlert.swift */; };
 		795BC3D52BA2C24400499014 /* FilterTransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D42BA2C24400499014 /* FilterTransactionsView.swift */; };
 		795BC3D72BA2D04C00499014 /* ChartModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795BC3D62BA2D04C00499014 /* ChartModel.swift */; };
 		795BC3DF2BA2E20300499014 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 795BC3DE2BA2E20300499014 /* WidgetKit.framework */; };
@@ -76,6 +78,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		7956D7102BAAC2AC0084F137 /* UniversalAlert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalAlert.swift; sourceTree = "<group>"; };
 		795BC3D42BA2C24400499014 /* FilterTransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTransactionsView.swift; sourceTree = "<group>"; };
 		795BC3D62BA2D04C00499014 /* ChartModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartModel.swift; sourceTree = "<group>"; };
 		795BC3DC2BA2E20300499014 /* StatusCardViewExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = StatusCardViewExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -212,6 +215,7 @@
 		79F127392BA04A5E00DE1ACB /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7956D7102BAAC2AC0084F137 /* UniversalAlert.swift */,
 				79F1273A2BA04A8000DE1ACB /* Constants.swift */,
 				79F1274E2BA0538200DE1ACB /* View+Extensions.swift */,
 				79F127502BA074DE00DE1ACB /* Date+Extensions.swift */,
@@ -366,6 +370,7 @@
 				795BC3E82BA2E20300499014 /* StatusCardView.swift in Sources */,
 				795BC3F52BA2E37300499014 /* View+Extensions.swift in Sources */,
 				795BC3FA2BA2E4E300499014 /* Constants.swift in Sources */,
+				7956D7122BAAC2B60084F137 /* UniversalAlert.swift in Sources */,
 				795BC3F62BA2E3FE00499014 /* CardView.swift in Sources */,
 				795BC3E42BA2E20300499014 /* StatusCardViewBundle.swift in Sources */,
 				795BC3F92BA2E4D200499014 /* TintColor.swift in Sources */,
@@ -383,6 +388,7 @@
 				79F1273B2BA04A8000DE1ACB /* Constants.swift in Sources */,
 				79F127382BA0496C00DE1ACB /* IntroScreen.swift in Sources */,
 				79F127422BA04F9900DE1ACB /* Transaction.swift in Sources */,
+				7956D7112BAAC2AC0084F137 /* UniversalAlert.swift in Sources */,
 				79F127562BA080C800DE1ACB /* TransactionCardView.swift in Sources */,
 				797EBA882BA1766A00544C10 /* DateFilterView.swift in Sources */,
 				795BC3D72BA2D04C00499014 /* ChartModel.swift in Sources */,
@@ -423,7 +429,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = StatusCardViewExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C33N6HTS9N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatusCardView/Info.plist;
@@ -434,7 +440,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DoubleShy0N.Vesper.StatusCardView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -451,7 +457,7 @@
 				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
 				CODE_SIGN_ENTITLEMENTS = StatusCardViewExtension.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = C33N6HTS9N;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = StatusCardView/Info.plist;
@@ -462,7 +468,7 @@
 					"@executable_path/Frameworks",
 					"@executable_path/../../Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DoubleShy0N.Vesper.StatusCardView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -599,7 +605,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vesper/Vesper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Vesper/Preview Content\"";
 				DEVELOPMENT_TEAM = C33N6HTS9N;
 				ENABLE_PREVIEWS = YES;
@@ -614,7 +620,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DoubleShy0N.Vesper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -631,7 +637,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = Vesper/Vesper.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Vesper/Preview Content\"";
 				DEVELOPMENT_TEAM = C33N6HTS9N;
 				ENABLE_PREVIEWS = YES;
@@ -646,7 +652,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0.1;
+				MARKETING_VERSION = 1.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = com.DoubleShy0N.Vesper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

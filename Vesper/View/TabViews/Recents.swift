@@ -14,10 +14,11 @@ struct Recents: View {
     /// View Properties
     @State private var startDate: Date = .now.startOfMonth
     @State private var endDate: Date = .now.endOfMonth
-    @State private var showFilterView: Bool = false
     @State private var selectedCategory: Category = .expense
     /// For Animation
     @Namespace private var animation
+    /// Alert
+    @State private var alert: AlertConfig = .init(disableOutsideTap: false, slideEdge: .leading)
     
     var body: some View {
         GeometryReader {
@@ -31,7 +32,8 @@ struct Recents: View {
                 LazyVStack(spacing: 10, content: {
                     /// Date Filter Button
                     Button(action: {
-                        showFilterView = true
+                        // showFilterView = true
+                        alert.present()
                     }, label: {
                         HStack(spacing: 5, content: {
                             Circle()
@@ -44,6 +46,8 @@ struct Recents: View {
                     })
                     .hSpacing(.leading)
                     .frame(height: 15)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .contentShape(.rect)
                     .padding(.horizontal, 15)
                     
                     FilterTransactionsView(startDate: startDate, endDate: endDate) { transactions in
@@ -88,24 +92,18 @@ struct Recents: View {
             .scrollTargetBehavior(CustomScrollBehavior())
             .scrollIndicators(.hidden)
             .background(.gray.opacity(0.15))
-            .blur(radius: showFilterView ? 8 : 0)
-            .disabled(showFilterView)
             .navigationDestination(for: Transaction.self) { transaction in
                 TransactionView(editTransaction: transaction)
             }
-            .overlay {
-                if showFilterView {
-                    DateFilterView(start: startDate, end: endDate, onSubmit: { start, end in
-                        startDate = start
-                        endDate = end
-                        showFilterView = false
-                    }, onClose: {
-                        showFilterView = false
-                    })
-                    .transition(.move(edge: .leading))
-                }
-            }
-            .animation(.snappy, value: showFilterView)
+        }
+        .alert(alertConfig: $alert) {
+            DateFilterView(start: startDate, end: endDate, onSubmit: { start, end in
+                startDate = start
+                endDate = end
+                alert.dismiss()
+            }, onClose: {
+                alert.dismiss()
+            })
         }
     }
     
@@ -207,5 +205,6 @@ struct CustomScrollBehavior: ScrollTargetBehavior {
 
 #Preview {
     ContentView()
+        .environment(SceneDelegate())
         .modelContainer(for: [Transaction.self])
 }

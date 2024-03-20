@@ -10,6 +10,8 @@ import WidgetKit
 
 @main
 struct VesperApp: App {
+    @UIApplicationDelegateAdaptor(AppDelegate.self) private var delegate
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
