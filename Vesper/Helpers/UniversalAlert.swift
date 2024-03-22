@@ -16,7 +16,12 @@ struct AlertConfig {
     fileprivate var show: Bool = false
     fileprivate var showView: Bool = false
     
-    init(enableBackgroundBlur: Bool = true, disableOutsideTap: Bool = true, transitionType: TransitionType = .slide, slideEdge: Edge = .bottom) {
+    init(
+        enableBackgroundBlur: Bool = true, 
+        disableOutsideTap: Bool = true,
+        transitionType: TransitionType = .slide,
+        slideEdge: Edge = .bottom
+    ) {
         self.enableBackgroundBlur = enableBackgroundBlur
         self.disableOutsideTap = disableOutsideTap
         self.transitionType = transitionType

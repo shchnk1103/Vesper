@@ -10,9 +10,6 @@ import SwiftUI
 struct Settings: View {
     /// User Properties
     @AppStorage("username") private var userName: String = ""
-    /// App Lock Properties
-    @AppStorage("isAppLockEnabled") private var isAppLockEnabled: Bool = false
-    @AppStorage("lockWhenAppGoesBackground") private var lockWhenAppGoesBackground: Bool = false
     /// View Properties
     @State private var changeTheme: Bool = false
     @Environment(\.colorScheme) private var scheme
@@ -45,10 +42,8 @@ struct Settings: View {
             }
             
             Section("App Lock") {
-                Toggle("Enable App Lock", isOn: $isAppLockEnabled)
-                
-                if isAppLockEnabled {
-                    Toggle("Lock When App Goes Background", isOn: $lockWhenAppGoesBackground)
+                NavigationLink("App Lock Settings") {
+                    LockSettingView ()
                 }
             }
             
@@ -67,5 +62,7 @@ struct Settings: View {
 }
 
 #Preview {
-    Settings()
+    NavigationStack {
+        Settings()
+    }
 }

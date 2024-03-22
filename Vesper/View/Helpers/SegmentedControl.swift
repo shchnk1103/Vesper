@@ -94,5 +94,6 @@ fileprivate struct SizeKey: PreferenceKey {
 
 #Preview {
     ContentView()
+        .environment(SceneDelegate())
         .modelContainer(for: [Transaction.self])
 }

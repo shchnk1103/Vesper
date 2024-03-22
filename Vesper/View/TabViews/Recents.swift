@@ -28,6 +28,7 @@ struct Recents: View {
             ScrollView(.vertical) {
                 HeaderView(size)
                     .padding(.horizontal, 15)
+                    .padding(.top, 15)
                     
                 LazyVStack(spacing: 10, content: {
                     /// Date Filter Button
@@ -38,16 +39,16 @@ struct Recents: View {
                         HStack(spacing: 5, content: {
                             Circle()
                                 .fill(appTint.gradient)
+                                .frame(height: 15)
                             
                             Text("\(format(date: startDate, format: "dd-MMM-yyyy")) to \(format(date: endDate, format: "dd-MMM-yyyy"))")
                                 .font(.caption2)
                                 .foregroundStyle(.gray)
                         })
                     })
+                    .frame(height: 25)
+                    .padding(.horizontal, 5)
                     .hSpacing(.leading)
-                    .frame(height: 15)
-                    .frame(maxWidth: .infinity, alignment: .leading)
-                    .contentShape(.rect)
                     .padding(.horizontal, 15)
                     
                     FilterTransactionsView(startDate: startDate, endDate: endDate) { transactions in

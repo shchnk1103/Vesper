@@ -33,6 +33,9 @@
 		797EBA8C2BA1B68600544C10 /* TransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EBA8B2BA1B68600544C10 /* TransactionView.swift */; };
 		7992D9552BA96731006FBC0D /* ThemeChangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D9542BA96731006FBC0D /* ThemeChangeView.swift */; };
 		7992D9572BA97EAF006FBC0D /* SunAndMoon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */; };
+		79E64A042BAC0B80004009B9 /* LockSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E64A032BAC0B80004009B9 /* LockSettingView.swift */; };
+		79E64A062BAC24F3004009B9 /* LockType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E64A052BAC24F3004009B9 /* LockType.swift */; };
+		79E64A082BAC2919004009B9 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E64A072BAC2919004009B9 /* Theme.swift */; };
 		79F127272BA0490100DE1ACB /* VesperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F127262BA0490100DE1ACB /* VesperApp.swift */; };
 		79F127292BA0490100DE1ACB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79F127282BA0490100DE1ACB /* ContentView.swift */; };
 		79F1272D2BA0490200DE1ACB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 79F1272C2BA0490200DE1ACB /* Assets.xcassets */; };
@@ -97,6 +100,9 @@
 		797EBA8B2BA1B68600544C10 /* TransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionView.swift; sourceTree = "<group>"; };
 		7992D9542BA96731006FBC0D /* ThemeChangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeChangeView.swift; sourceTree = "<group>"; };
 		7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunAndMoon.swift; sourceTree = "<group>"; };
+		79E64A032BAC0B80004009B9 /* LockSettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockSettingView.swift; sourceTree = "<group>"; };
+		79E64A052BAC24F3004009B9 /* LockType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockType.swift; sourceTree = "<group>"; };
+		79E64A072BAC2919004009B9 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		79F127232BA0490100DE1ACB /* Vesper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vesper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		79F127262BA0490100DE1ACB /* VesperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VesperApp.swift; sourceTree = "<group>"; };
 		79F127282BA0490100DE1ACB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -231,6 +237,8 @@
 				79F127412BA04F9900DE1ACB /* Transaction.swift */,
 				79F127432BA0509C00DE1ACB /* TintColor.swift */,
 				795BC3D62BA2D04C00499014 /* ChartModel.swift */,
+				79E64A052BAC24F3004009B9 /* LockType.swift */,
+				79E64A072BAC2919004009B9 /* Theme.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,10 +262,11 @@
 				79F127552BA080C800DE1ACB /* TransactionCardView.swift */,
 				797EBA852BA1691300544C10 /* SwipeAction.swift */,
 				797EBA872BA1766A00544C10 /* DateFilterView.swift */,
-				797EBA892BA1823100544C10 /* LockView.swift */,
 				795BC3D42BA2C24400499014 /* FilterTransactionsView.swift */,
 				7992D9542BA96731006FBC0D /* ThemeChangeView.swift */,
 				7992D9562BA97EAF006FBC0D /* SunAndMoon.swift */,
+				797EBA892BA1823100544C10 /* LockView.swift */,
+				79E64A032BAC0B80004009B9 /* LockSettingView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -389,10 +398,12 @@
 				79F127382BA0496C00DE1ACB /* IntroScreen.swift in Sources */,
 				79F127422BA04F9900DE1ACB /* Transaction.swift in Sources */,
 				7956D7112BAAC2AC0084F137 /* UniversalAlert.swift in Sources */,
+				79E64A042BAC0B80004009B9 /* LockSettingView.swift in Sources */,
 				79F127562BA080C800DE1ACB /* TransactionCardView.swift in Sources */,
 				797EBA882BA1766A00544C10 /* DateFilterView.swift in Sources */,
 				795BC3D72BA2D04C00499014 /* ChartModel.swift in Sources */,
 				797EBA8C2BA1B68600544C10 /* TransactionView.swift in Sources */,
+				79E64A062BAC24F3004009B9 /* LockType.swift in Sources */,
 				79F127292BA0490100DE1ACB /* ContentView.swift in Sources */,
 				79F127472BA051A000DE1ACB /* Recents.swift in Sources */,
 				7992D9552BA96731006FBC0D /* ThemeChangeView.swift in Sources */,
@@ -402,6 +413,7 @@
 				7992D9572BA97EAF006FBC0D /* SunAndMoon.swift in Sources */,
 				79F1274F2BA0538200DE1ACB /* View+Extensions.swift in Sources */,
 				79F127272BA0490100DE1ACB /* VesperApp.swift in Sources */,
+				79E64A082BAC2919004009B9 /* Theme.swift in Sources */,
 				797EBA862BA1691300544C10 /* SwipeAction.swift in Sources */,
 				79F127442BA0509C00DE1ACB /* TintColor.swift in Sources */,
 				795BC3D52BA2C24400499014 /* FilterTransactionsView.swift in Sources */,

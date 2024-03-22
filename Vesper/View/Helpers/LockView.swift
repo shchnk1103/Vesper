@@ -21,6 +21,7 @@ struct LockView<Content: View>: View {
     @State private var animateField: Bool = false
     @State private var isUnlocked: Bool = false
     @State private var noBiometricAccess: Bool = false
+    @State private var enableFaceID: Bool? = true
     /// Lock Context
     let context = LAContext()
     /// Scene Phase
@@ -61,6 +62,7 @@ struct LockView<Content: View>: View {
                                     .background(.ultraThinMaterial, in: .rect(cornerRadius: 10))
                                     .contentShape(.rect)
                                     .onTapGesture {
+                                        enableFaceID = true
                                         unlockView()
                                     }
                                     
@@ -81,6 +83,7 @@ struct LockView<Content: View>: View {
                         NumberPadPinView()
                     }
                 }
+                .zIndex(99)
                 .environment(\.colorScheme, .dark)
                 .transition(.offset(y: size.height + 100))
             }
@@ -106,14 +109,20 @@ struct LockView<Content: View>: View {
     private func unlockView() {
         /// Checking and Unlocking View
         Task {
-            if isBiometricAvailable && lockType != .number {
+            if isBiometricAvailable && lockType != .number && (enableFaceID == true) {
                 /// Requesting Biometric Unlock
-                if let result = try? await context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "Unlock the View"), result {
+                if let result = try? await context.evaluatePolicy(
+                    .deviceOwnerAuthenticationWithBiometrics,
+                    localizedReason: "Unlock the View"
+                ), result {
                     withAnimation(.snappy, completionCriteria: .logicallyComplete) {
                         isUnlocked = true
+                        enableFaceID = true
                     } completion: {
                         pin = ""
                     }
+                } else {
+                    enableFaceID = nil
                 }
             }
             
@@ -188,82 +197,81 @@ struct LockView<Content: View>: View {
             })
             .frame(maxHeight: .infinity)
             
-            /// Custom Number Pad
-            GeometryReader { _ in
-                LazyVGrid(columns: Array(repeating: GridItem(), count: 3), content: {
-                    ForEach(1...9, id: \.self) { number in
-                        Button(action: {
-                            /// Adding Number to Pin
-                            /// Max Limit - 4
-                            if pin.count < 4 {
-                                pin.append("\(number)")
-                            }
-                        }, label: {
-                            Text("\(number)")
-                                .font(.title)
-                                .frame(maxWidth: .infinity)
-                                .padding(.vertical, 20)
-                                .contentShape(.rect)
-                        })
-                        .tint(.white)
-                    }
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        if pin.count < 4 {
-                            pin.append("0")
-                        }
-                    }, label: {
-                        Text("0")
-                            .font(.title)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 20)
-                            .contentShape(.rect)
-                    })
-                    .tint(.white)
-                    
-                    Button(action: {
-                        if !pin.isEmpty {
-                            pin.removeLast()
-                        }
-                    }, label: {
-                        Image(systemName: "delete.backward")
-                            .font(.title)
-                            .frame(maxWidth: .infinity)
-                            .padding(.vertical, 20)
-                            .contentShape(.rect)
-                    })
-                    .tint(.white)
-                })
-                .frame(maxHeight: .infinity, alignment: .bottom)
-            }
-            .onChange(of: pin) { oldValue, newValue in
-                if newValue.count == 4 {
-                    /// Validate Pin
-                    if lockPin == pin {
-                        withAnimation(.snappy, completionCriteria: .logicallyComplete) {
-                            isUnlocked = true
-                        } completion: {
-                            pin = ""
-                            noBiometricAccess = !isBiometricAvailable
-                        }
-                    } else {
-                        pin = ""
-                        animateField.toggle()
-                    }
-                }
-            }
+            CustomNumPad()
         })
         .padding()
         .environment(\.colorScheme, .dark)
     }
     
-    /// Lock Type
-    enum LockType: String {
-    case biometric = "Bio Metric Auth"
-        case number = "Custom Number Lock"
-        case both = "First preference will be biometric, and if it's not available, it will go for number lock."
+    /// Custom Number Pad
+    @ViewBuilder
+    func CustomNumPad() -> some View {
+        GeometryReader { _ in
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 3), content: {
+                ForEach(1...9, id: \.self) { number in
+                    Button(action: {
+                        /// Adding Number to Pin
+                        /// Max Limit - 4
+                        if pin.count < 4 {
+                            pin.append("\(number)")
+                        }
+                    }, label: {
+                        Text("\(number)")
+                            .font(.title)
+                            .frame(maxWidth: .infinity)
+                            .padding(.vertical, 20)
+                            .contentShape(.rect)
+                    })
+                    .tint(.white)
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                    if pin.count < 4 {
+                        pin.append("0")
+                    }
+                }, label: {
+                    Text("0")
+                        .font(.title)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                        .contentShape(.rect)
+                })
+                .tint(.white)
+                
+                Button(action: {
+                    if !pin.isEmpty {
+                        pin.removeLast()
+                    }
+                }, label: {
+                    Image(systemName: "delete.backward")
+                        .font(.title)
+                        .frame(maxWidth: .infinity)
+                        .padding(.vertical, 20)
+                        .contentShape(.rect)
+                })
+                .tint(.white)
+            })
+            .frame(maxHeight: .infinity, alignment: .bottom)
+        }
+        .onChange(of: pin) { oldValue, newValue in
+            if newValue.count == 4 {
+                /// Validate Pin
+                if lockPin == pin {
+                    withAnimation(.snappy, completionCriteria: .logicallyComplete) {
+                        isUnlocked = true
+                    } completion: {
+                        pin = ""
+                        noBiometricAccess = !isBiometricAvailable
+                        enableFaceID = true
+                    }
+                } else {
+                    pin = ""
+                    animateField.toggle()
+                }
+            }
+        }
     }
 }
 

@@ -22,14 +22,16 @@ struct ContentView: View {
     /// App Lock Properties
     @AppStorage("isAppLockEnabled") private var isAppLockEnabled: Bool = false
     @AppStorage("lockWhenAppGoesBackground") private var lockWhenAppGoesBackground: Bool = false
+    @AppStorage("lockPin") private var lockPin: String = ""
+    @AppStorage("lockType") private var lockType: LockType = .both
     /// View Properties
     @AppStorage("tabType") private var tabType: Bool = false
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
 
     var body: some View {
         LockView(
-            lockType: .biometric,
-            lockPin: "",
+            lockType: lockType,
+            lockPin: lockPin,
             isEnabled: isAppLockEnabled,
             lockWhenAppGoesBackground: lockWhenAppGoesBackground
         ) {
@@ -86,9 +88,9 @@ struct ContentView: View {
                 }
                 .padding(.horizontal, tabType ? 15 : 0)
             }
+            .preferredColorScheme(userTheme.colorScheme)
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .ignoresSafeArea(.keyboard, edges: .bottom)
-        .preferredColorScheme(userTheme.colorScheme)
     }
     
     var tabSelection: Binding<SegmentedTab> {
@@ -119,5 +121,6 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
+        .environment(SceneDelegate())
         .modelContainer(for: [Transaction.self])
 }
