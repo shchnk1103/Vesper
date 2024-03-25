@@ -50,21 +50,15 @@ struct StatusCardView: Widget {
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
-            if #available(iOS 17.0, *) {
-                StatusCardViewEntryView(entry: entry)
-                    .containerBackground(.fill.tertiary, for: .widget)
-                    .modelContainer(for: Transaction.self)
-            } else {
-                StatusCardViewEntryView(entry: entry)
-                    .padding()
-                    .background()
-                    .modelContainer(for: Transaction.self)
-            }
+            StatusCardViewEntryView(entry: entry)
+                .containerBackground(.fill.tertiary, for: .widget)
+                .modelContainer(for: Transaction.self)
+            
         }
         .supportedFamilies([.systemMedium])
         .contentMarginsDisabled()
-        .configurationDisplayName("My Widget")
-        .description("This is an example widget.")
+        .configurationDisplayName("Vesper Star")
+        .description("This is an easy widget.")
     }
 }
 

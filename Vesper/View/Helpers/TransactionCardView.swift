@@ -30,7 +30,7 @@ struct TransactionCardView: View {
                         .font(.caption)
                         .foregroundStyle(.primary.secondary)
                     
-                    Text(format(date: transaction.dateAdded, format: "dd - MMM - yy"))
+                    Text(format(date: transaction.dateAdded, format: "dd - MMM - yyyy"))
                         .font(.caption2)
                         .foregroundStyle(.gray)
                     
@@ -68,4 +68,6 @@ struct TransactionCardView: View {
 
 #Preview {
     ContentView()
+        .environment(SceneDelegate())
+        .modelContainer(for: [Transaction.self])
 }

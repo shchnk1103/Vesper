@@ -15,16 +15,46 @@ struct Settings: View {
     @Environment(\.colorScheme) private var scheme
     @AppStorage("tabType") private var tabType: Bool = false
     @AppStorage("userTheme") private var userTheme: Theme = .systemDefault
+    @State private var alert: AlertConfig = .init(slideEdge: .bottom)
+    @State private var avatarColor: Color = appTint
     
     var body: some View {
         List {
-            Section("User Name") {
-                TextField("Enter your name", text: $userName)
+            Section {
+                HStack(spacing: 12) {
+                    Circle()
+                        .fill(avatarColor.gradient)
+                        .frame(width: 52, height: 52)
+                        .overlay {
+                            Text("\(userName.prefix(1))")
+                                .font(.title.bold())
+                                .foregroundStyle(.white)
+                        }
+                    
+                    Text(userName.isEmpty ? "Enter your name" : userName)
+                        .font(.title3)
+                        .fontWeight(.semibold)
+                        .lineLimit(1)
+                }
+                .onTapGesture {
+                    alert.present()
+                }
+            }
+            .onAppear {
+                let count = tints.count
+                let randomIndex = Int.random(in: 0 ..< count)
+                
+                avatarColor = tints[randomIndex].value
             }
             
             Section("Appearance") {
                 HStack(spacing: 0, content: {
-                    Text("Appearance")
+                    HStack {
+                        Image(systemName: "circle.lefthalf.filled.inverse")
+                            .iconFrame
+                        
+                        Text("Theme")
+                    }
                     
                     Spacer()
                     
@@ -39,16 +69,27 @@ struct Settings: View {
                         })
                     }
                 })
+                
+                Toggle(isOn: $tabType, label: {
+                    HStack {
+                        Image(systemName: "slider.horizontal.below.square.filled.and.square")
+                            .iconFrame
+                        
+                        Text("Tab Bar Style")
+                    }
+                })
+                .tint(appTint)
             }
             
             Section("App Lock") {
-                NavigationLink("App Lock Settings") {
-                    LockSettingView ()
+                HStack {
+                    Image(systemName: "lock.fill")
+                        .iconFrame
+                    
+                    NavigationLink("Lock Settings") {
+                        LockSettingView ()
+                    }
                 }
-            }
-            
-            Section("Tab Type") {
-                Toggle("Change Tab Type", isOn: $tabType)
             }
         }
         .navigationTitle("Settings")
@@ -58,11 +99,68 @@ struct Settings: View {
                 .presentationDetents([.height(410)])
                 .presentationBackground(.clear)
         })
+        .alert(alertConfig: $alert) {
+            EditNameView()
+        }
+    }
+    
+    @ViewBuilder
+    func EditNameView() -> some View {
+        VStack(spacing: 12) {
+            Text("Please enter your name! 🎉")
+                .font(.title2.bold())
+            
+            TextField("", text: $userName)
+                .padding()
+                .background(.secondary.opacity(0.25), in: .rect(cornerRadius: 12))
+                .padding(.horizontal, 12)
+            
+            HStack {
+                Spacer()
+                
+                Button("Cancel") {
+                    alert.dismiss()
+                }
+                .foregroundStyle(.white)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 24)
+                .background(.red.gradient, in: .capsule)
+                .contentShape(.rect)
+                
+                Spacer()
+                
+                Button("Submit") {
+                    alert.dismiss()
+                }
+                .foregroundStyle(.white)
+                .padding(.vertical, 8)
+                .padding(.horizontal, 24)
+                .background(.green.gradient, in: .capsule)
+                .contentShape(.rect)
+                
+                Spacer()
+            }
+            .frame(maxWidth: .infinity, alignment: .center)
+        }
+        .padding(30)
+        .background {
+            RoundedRectangle(cornerRadius: 24)
+                .fill(.background)
+                .shadow(radius: 30)
+                .padding()
+        }
+    }
+}
+
+extension Image {
+    var iconFrame: some View {
+        self.frame(width: 24, height: 24)
     }
 }
 
 #Preview {
     NavigationStack {
         Settings()
+            .environment(SceneDelegate())
     }
 }
