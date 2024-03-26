@@ -14,6 +14,7 @@ struct ContentView: View {
     /// Active Tab
     @State private var activeTab: SegmentedTab = .recents
     /// Navigation Paths
+    @State private var path = NavigationPath()
     @State private var recentPath: NavigationPath = .init()
     @State private var searchPath: NavigationPath = .init()
     @State private var graphPath: NavigationPath = .init()
@@ -35,43 +36,40 @@ struct ContentView: View {
             isEnabled: isAppLockEnabled,
             lockWhenAppGoesBackground: lockWhenAppGoesBackground
         ) {
-            TabView(selection: $activeTab,
-                    content:  {
-                NavigationStack(path: $recentPath) {
-                    Recents()
+            NavigationStack(path: $path) {
+                ZStack(alignment: .bottom) {
+                    switch activeTab {
+                    case .recents:
+                        Recents()
+                            .toolbarBackground(.hidden, for: .tabBar)
+                            .tag(SegmentedTab.recents)
+                    case .search:
+                        Search()
+                            .toolbarBackground(.hidden, for: .tabBar)
+                            .tag(SegmentedTab.search)
+                    case .charts:
+                        Graphs()
+                            .toolbarBackground(.hidden, for: .tabBar)
+                            .tag(SegmentedTab.charts)
+                    case .settings:
+                        Settings()
+                            .toolbarBackground(.hidden, for: .tabBar)
+                            .tag(SegmentedTab.settings)
+                    }
                 }
-                .toolbarBackground(.hidden, for: .tabBar)
-                .tag(SegmentedTab.recents)
-                
-                NavigationStack(path: $searchPath) {                
-                    Search()
-                }
-                .toolbarBackground(.hidden, for: .tabBar)
-                .tag(SegmentedTab.search)
-                
-                NavigationStack(path: $graphPath) {
-                    Graphs()
-                }
-                .toolbarBackground(.hidden, for: .tabBar)
-                .tag(SegmentedTab.charts)
-                
-                NavigationStack(path: $settingPath) {
-                    Settings()
-                }
-                .toolbarBackground(.hidden, for: .tabBar)
-                .tag(SegmentedTab.settings)
-            })
+            }
             .tint(appTint)
             .sheet(isPresented: $isFirstTime, content: {
                 IntroScreen()
                     .interactiveDismissDisabled()
             })
-            .overlay(alignment: .bottom) {
+            .overlay(alignment: .bottom, content: {
                 SegmentedControl(
                     tabs: SegmentedTab.allCases,
                     activeTab: $activeTab,
                     activeTint: tabType ? .white : .primary,
-                    inActiveTint: .gray.opacity(0.5)
+                    inActiveTint: .gray.opacity(0.5),
+                    path: $path
                 ) { size in
                     RoundedRectangle(cornerRadius: tabType ? 30 : 2)
                         .fill(appTint)
@@ -84,10 +82,11 @@ struct ContentView: View {
                         .fill(.ultraThinMaterial)
                         .tabSafeArea(tabType)
                         .padding(.top, tabType ? 0 : -10)
-                        .shadow(radius: 3, x: 3, y: 3)
+                        .shadow(color: appTint.opacity(0.25), radius: 8, x: 3, y: 3)
                 }
                 .padding(.horizontal, tabType ? 15 : 0)
-            }
+                .padding(.bottom, tabType ? 10 : 0)
+            })
             .preferredColorScheme(userTheme.colorScheme)
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }

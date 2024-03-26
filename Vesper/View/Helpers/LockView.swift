@@ -88,6 +88,7 @@ struct LockView<Content: View>: View {
                 .transition(.offset(y: size.height + 100))
             }
         }
+        .ignoresSafeArea(.keyboard, edges: .bottom)
         .onChange(of: isEnabled, initial: true) { oldValue, newValue in
             if newValue {
                 unlockView()

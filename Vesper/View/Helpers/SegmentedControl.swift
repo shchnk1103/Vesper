@@ -17,6 +17,7 @@ struct SegmentedControl<Indicator: View>: View {
     var font: Font = .title3
     var activeTint: Color
     var inActiveTint: Color
+    @Binding var path: NavigationPath
     /// Indicator View
     @ViewBuilder var indicatorView: (CGSize) -> Indicator
     /// View Properties
@@ -45,6 +46,7 @@ struct SegmentedControl<Indicator: View>: View {
                     .onTapGesture {
                         if let index = tabs.firstIndex(of: tab), let activeIndex = tabs.firstIndex(of: activeTab) {
                             activeTab = tab
+                            path.removeLast(path.count)
                             
                             withAnimation(.snappy(duration: 0.25, extraBounce: 0)) {
                                 excessTabWidth = containerWidthForEachTab * CGFloat(index - activeIndex)
